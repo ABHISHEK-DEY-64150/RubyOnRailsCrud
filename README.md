@@ -1,9 +1,8 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple crud app using Ruby on Rails.
 
-Things you may want to cover:
+One can create new article with title and description,edit and delete it.
 
 * Ruby version
 
