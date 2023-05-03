@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html>
+<style>
+.center {
+  display: flex;
+  background-color:#EAF2F8;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  width: 60%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+<%= render "nav", article: @article %>
+<h1 style="display:flex; justify-content:center">Articles</h1>
+<div class="center">
+<table>
+  <tr>
+    <th>Tile</th>
+    <th>Body</th>
+    <th>Actions</th>
+  </tr>
+  <tr>
+  <% @articles.each do |article| %>
+    <td><%=  article.title %></td>
+    <td><%= article.body %></td>
+    <td style="display:flex">
+    <div style="display:flex;margin-left:1rem" >
+    <%= button_to "show" , article_path(article),method: :get %>
+    </div>
+    <div style="display:flex;margin-left:1rem">
+    <%= button_to "Edit" , edit_article_path(article),method: :get %>
+    </div>
+    <div style="display:flex;margin-left:1rem">
+    <%= button_to "Comment" , article_path(article),method: :get %>
+    </div>
+    <div style="display:flex;margin-left:1rem">
+    <%= button_to "Delete", article_path(article), method: :delete ,data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %>
+    </div>
+
+    </td>
+  </tr> 
+  <% end %>
+</table>
+</div>
+</html>

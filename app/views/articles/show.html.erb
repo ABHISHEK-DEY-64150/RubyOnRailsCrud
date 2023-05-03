@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<style>
+.center {
+  display: flex;
+  background-color:#EAF2F8;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  margin-top:1rem;
+  width: 30%;
+  border: 3px solid #73AD21;
+  padding: 10px;
+  
+}
+</style>
+<%= render "nav", article: @article %>
+<div class="center">
+<div>
+<h1 style="display:flex; justify-content:center"><%= @article.title %></h1>
+
+<p style="display:flex; justify-content:center"><%= @article.body %></p>
+
+<ul style="display:flex">
+  <li><%= link_to "Edit", edit_article_path(@article) %></li>
+  <li style="margin-left:2rem"><%= link_to "Delete", article_path(@article), data: {
+                    turbo_method: :delete,
+                    turbo_confirm: "Are you sure?"
+                  } %></li>
+</ul>
+
+
+<h2>Comments</h2>
+<% @article.comments.each do |comment| %>
+  <p>
+    <strong>Commenter:</strong>
+    <%= comment.commenter %>
+  </p>
+
+  <p>
+    <strong>Comment:</strong>
+    <%= comment.body %>
+  </p>
+<% end %>
+
+<h2>Add a comment:</h2>
+<%= form_with model: [ @article, @article.comments.build ] do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+</div>
+</div>
+</html>
